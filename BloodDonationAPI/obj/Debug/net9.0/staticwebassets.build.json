@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "badtoBTBIq3X8fH7awMC2f5mQT4yEFqDmnpBpRHqL6Q=",
+  "Source": "BloodDonationAPI",
+  "BasePath": "_content/BloodDonationAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

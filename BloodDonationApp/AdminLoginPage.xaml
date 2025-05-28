@@ -1,0 +1,8 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BloodDonationApp.AdminLoginPage"
+             Title="Admin Girişi">
+    <VerticalStackLayout Padding="30">
+        <Label Text="Admin Girişi Sayfası" FontSize="24" />
+    </VerticalStackLayout>
+</ContentPage>

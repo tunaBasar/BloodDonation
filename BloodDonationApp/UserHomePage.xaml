@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="BloodDonationApp.UserHomePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Ana Sayfa">
+
+       <Grid>
+              <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="300"/>
+                     <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+
+              <!-- Sol Panel - Kullanıcı Bilgileri -->
+              <Border Grid.Column="0"
+                      BackgroundColor="LightGray"
+                      Stroke="Gray"
+                      StrokeThickness="1">
+
+                     <ScrollView>
+                            <StackLayout Padding="20"
+                                          Spacing="15">
+                                   <Label Text="Kullanıcı Bilgileri"
+                                          FontSize="18"
+                                          FontAttributes="Bold"
+                                          HorizontalOptions="Center"
+                                          TextColor="DarkBlue"/>
+
+                                   <Frame BackgroundColor="White"
+                                          CornerRadius="10"
+                                          HasShadow="True"
+                                          Padding="15">
+
+                                          <StackLayout Spacing="10">
+
+                                                 <Label x:Name="FullNameLabel"
+                                                        FontSize="16"
+                                                        FontAttributes="Bold"
+                                                        HorizontalOptions="Center"
+                                                        TextColor="Black"/>
+
+                                                 <BoxView HeightRequest="1"
+                                                          BackgroundColor="LightGray"
+                                                          Margin="0,10"/>
+
+                                                 <!-- Kullanıcı Detay Bilgileri -->
+                                                 <StackLayout Spacing="8">
+                                                        <StackLayout Orientation="Horizontal">
+                                                               <Label Text="Email:"
+                                                                      FontAttributes="Bold"
+                                                                      WidthRequest="80"/>
+                                                               <Label x:Name="EmailLabel"
+                                                                      TextColor="DarkGray"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal">
+                                                               <Label Text="Telefon:"
+                                                                      FontAttributes="Bold"
+                                                                      WidthRequest="80"/>
+                                                               <Label x:Name="PhoneLabel"
+                                                                      TextColor="DarkGray"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal">
+                                                               <Label Text="Kan Grubu:"
+                                                                      FontAttributes="Bold"
+                                                                      WidthRequest="80"/>
+                                                               <Label x:Name="BloodTypeLabel"
+                                                                      TextColor="Red"
+                                                                      FontAttributes="Bold"/>
+                                                        </StackLayout>
+                                                 </StackLayout>
+                                          </StackLayout>
+                                   </Frame>
+
+                                   <Button Text="Çıkış Yap"
+                                           BackgroundColor="Red"
+                                           TextColor="White"
+                                           CornerRadius="5"
+                                           Clicked="OnLogoutClicked"/>
+                            </StackLayout>
+                     </ScrollView>
+              </Border>
+
+              <!-- Sağ Panel - Ana İçerik -->
+              <StackLayout Grid.Column="1"
+                            Padding="20"
+                            Spacing="15">
+
+                     <!-- Arama ve Filtreleme -->
+                     <StackLayout Orientation="Horizontal"
+                                   Spacing="10">
+                            <SearchBar x:Name="DonationSearchBar"
+                                       Placeholder="Bağış isteklerinde ara..."
+                                       HorizontalOptions="FillAndExpand"
+                                       SearchButtonPressed="OnSearchButtonPressed"/>
+
+                            <Button Text="Filtrele"
+                                    BackgroundColor="DarkBlue"
+                                    TextColor="White"
+                                    WidthRequest="100"
+                                    Clicked="OnFilterButtonClicked"/>
+                     </StackLayout>
+
+                     <!-- Aktif Bağış İstekleri -->
+                     <Label Text="Aktif Bağış İstekleri"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            TextColor="DarkBlue"/>
+
+                     <CollectionView x:Name="DonationRequestsCollectionView">
+                            <CollectionView.ItemTemplate>
+                                   <DataTemplate>
+                                          <Grid Padding="10">
+                                                 <Frame BackgroundColor="White"
+                                                        CornerRadius="10"
+                                                        HasShadow="True"
+                                                        Padding="15">
+
+                                                        <StackLayout Spacing="5">
+                                                               <StackLayout Orientation="Horizontal">
+                                                                      <Label Text="{Binding BloodType}"
+                                                                             FontSize="24"
+                                                                             FontAttributes="Bold"
+                                                                             TextColor="Red"
+                                                                             VerticalOptions="Center"/>
+
+                                                                      <StackLayout HorizontalOptions="FillAndExpand"
+                                                                                   Margin="15,0,0,0">
+                                                                             <Label Text="{Binding PatientName}"
+                                                                                    FontSize="16"
+                                                                                    FontAttributes="Bold"/>
+                                                                             <Label Text="{Binding HospitalName}"
+                                                                                    FontSize="14"
+                                                                                    TextColor="Gray"/>
+                                                                      </StackLayout>
+
+                                                                      <Label Text="{Binding UrgencyLevel}"
+                                                                             BackgroundColor="Orange"
+                                                                             TextColor="White"
+                                                                             Padding="5"
+                                                                             VerticalOptions="Center"/>
+                                                               </StackLayout>
+
+                                                               <Label Text="{Binding Description}"
+                                                                      FontSize="12"
+                                                                      TextColor="DarkGray"
+                                                                      MaxLines="2"/>
+
+                                                               <StackLayout Orientation="Horizontal">
+                                                                      <Label Text="{Binding CreatedDate, StringFormat='Tarih: {0:dd.MM.yyyy}'}"
+                                                                             FontSize="12"
+                                                                             TextColor="Gray"/>
+
+                                                                      <Button Text="Bağışta Bulun"
+                                                                              BackgroundColor="Green"
+                                                                              TextColor="White"
+                                                                              CornerRadius="5"
+                                                                              HorizontalOptions="EndAndExpand"
+                                                                              CommandParameter="{Binding Id}"
+                                                                              Clicked="OnDonateButtonClicked"/>
+                                                               </StackLayout>
+                                                        </StackLayout>
+                                                 </Frame>
+                                          </Grid>
+                                   </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                     </CollectionView>
+              </StackLayout>
+       </Grid>
+</ContentPage>

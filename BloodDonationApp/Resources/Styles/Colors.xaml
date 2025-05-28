@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Ana Renkler -->
+    <Color x:Key="Primary">#C62828</Color> <!-- Koyu kırmızı -->
+    <Color x:Key="PrimaryLight">#EF5350</Color> <!-- Açık kırmızı -->
+    <Color x:Key="PrimaryDark">#8E0000</Color> <!-- Kan kırmızısı -->
+    
+    <Color x:Key="Accent">#FFEBEE</Color> <!-- Çok açık pembe (arka planlar için) -->
+    <Color x:Key="Secondary">#FFFFFF</Color> <!-- Beyaz -->
+    <Color x:Key="Tertiary">#000000</Color> <!-- Siyah -->
+
+    <!-- Nötr Tonlar -->
+    <Color x:Key="Gray100">#F5F5F5</Color>
+    <Color x:Key="Gray200">#EEEEEE</Color>
+    <Color x:Key="Gray300">#E0E0E0</Color>
+    <Color x:Key="Gray400">#BDBDBD</Color>
+    <Color x:Key="Gray500">#9E9E9E</Color>
+    <Color x:Key="Gray600">#757575</Color>
+    <Color x:Key="Gray900">#212121</Color>
+
+    <!-- Özel Tanımlar -->
+    <Color x:Key="Danger">#D32F2F</Color> <!-- Vurgulu kırmızı -->
+    <Color x:Key="Info">#0288D1</Color> <!-- Bilgi kutuları için mavi -->
+    <Color x:Key="Success">#388E3C</Color> <!-- Başarı mesajları için yeşil -->
+
+    <!-- Fırçalar -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLight}"/>
+    <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource PrimaryDark}"/>
+
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
+    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}"/>
+
+    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
+    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
+    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
+
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource Danger}"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource Info}"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource Success}"/>
+</ResourceDictionary>
