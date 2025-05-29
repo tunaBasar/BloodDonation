@@ -15,7 +15,7 @@ namespace BloodDonationAPI.DataAccess
         public DbSet<Donation> Donations { get; set; }
 
         public DbSet<Admin> Admins { get; set; }
-        public DbSet<Places> Places{get; set;}
+        public DbSet<Hospitals> Hospitals{get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,7 +77,7 @@ namespace BloodDonationAPI.DataAccess
             });
 
             //Places
-            modelBuilder.Entity<Places>(entity =>
+            modelBuilder.Entity<Hospitals>(entity =>
             {
                 entity.HasKey(p => p.Id);
                 entity.Property(p => p.Address);

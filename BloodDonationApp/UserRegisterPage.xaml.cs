@@ -1,17 +1,19 @@
 using BloodDonationApp.Models;
 using BloodDonationApp.Services;
+using BloodDonationApp.Helpers;
+
 namespace BloodDonationApp;
 
 public partial class UserRegisterPage : ContentPage
 {
     private readonly IApiService _apiService;
 
-    public UserRegisterPage()
+    // Dependency Injection ile servisi al
+    public UserRegisterPage(IApiService apiService)
     {
         InitializeComponent();
-        _apiService = new ApiService();
+        _apiService = apiService;
     }
-
 
     private async void OnLoginButtonClicked(object sender, EventArgs e)
     {
@@ -28,22 +30,21 @@ public partial class UserRegisterPage : ContentPage
 
             if (string.IsNullOrWhiteSpace(loginRequest.Tc) || string.IsNullOrWhiteSpace(loginRequest.Password))
             {
-                await DisplayAlert("Hata", "Tc ve şifre alanları boş olamaz.", "Tamam");
+                await DisplayAlert("Hata", "TC ve şifre alanları boş olamaz.", "Tamam");
                 return;
             }
+
             var userResponse = await _apiService.LoginAsync(loginRequest);
 
-            if (userResponse != null)
+            if (userResponse != null && userResponse.Success)
             {
-                await Shell.Current.GoToAsync($"//UserHomePage", true, new Dictionary<string, object>
-                {
-                    ["UserData"] = userResponse
-                });
+                SessionManager.SetUser(userResponse.Data);
+                await Shell.Current.GoToAsync(nameof(UserHomePage));
             }
-        }
-        catch (HttpRequestException httpEx)
-        {
-            await DisplayAlert("Giriş Hatası", "Email veya şifre hatalı.", "Tamam");
+            else
+            {
+                await DisplayAlert("Giriş Hatası", userResponse?.Message ?? "Giriş başarısız", "Tamam");
+            }
         }
         catch (Exception ex)
         {
@@ -51,7 +52,6 @@ public partial class UserRegisterPage : ContentPage
         }
         finally
         {
-
             LoadingIndicator.IsVisible = false;
             LoadingIndicator.IsRunning = false;
         }
@@ -105,7 +105,6 @@ public partial class UserRegisterPage : ContentPage
 
     private bool ValidateForm()
     {
-        // Zorunlu alanlar kontrolü
         if (string.IsNullOrWhiteSpace(FirstNameEntry.Text))
         {
             DisplayAlert("Hata", "Ad alanı boş olamaz.", "Tamam");
@@ -167,5 +166,3 @@ public partial class UserRegisterPage : ContentPage
         await Shell.Current.GoToAsync("//UserLoginPage");
     }
 }
-
-

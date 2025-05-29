@@ -10,6 +10,5 @@ namespace BloodDonationAPI.DTOs.UserDto
         public string? Mail { get; set; }
         public string? PhoneNumber { get; set; }
         public BloodType BloodType { get; set; }
-        public int StarPoint { get; set; }
     }
 }

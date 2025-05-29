@@ -1,3 +1,4 @@
+using BloodDonationAPI.DTOs.DonationDto;
 using BloodDonationAPI.DTOs.RequestDto;
 
 namespace BloodDonationAPI.Services.Interfaces
@@ -6,8 +7,10 @@ namespace BloodDonationAPI.Services.Interfaces
     {
         Task<RequestResponseDto> CreateRequestAsync(RequestCreateDto requestCreateDto);
         Task<RequestResponseDto?> GetRequestByIdAsync(int id);
-        Task<IEnumerable<RequestResponseDto>> GetAllRequestsAsync();
-        Task<bool> UpdateRequestAsync(int id,RequestUpdateDto requestUpdateDto);
+        Task<IEnumerable<RequestResponseDto>> GetAllRequestsAsync(int id);
+        Task<bool> UpdateRequestAsync(int id, RequestUpdateDto requestUpdateDto);
         Task<bool> DeleteRequestAsync(int id);
+
+        Task<bool> DeactiveRequest(int id,DeactiveRequestDto dto);
     }
 }

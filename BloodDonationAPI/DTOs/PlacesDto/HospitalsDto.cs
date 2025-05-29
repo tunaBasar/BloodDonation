@@ -1,6 +1,6 @@
 namespace BloodDonationAPI.DTOs.PlacesDto
 {
-    public class PlacesDto
+    public class HospitalsDto
     {
         public int Id {get; set;}
         public string Address {get; set;} = "Yagmur caddesi nehir mahallesi Orman/Koruluk";

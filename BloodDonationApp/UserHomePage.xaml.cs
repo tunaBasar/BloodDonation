@@ -1,130 +1,118 @@
 using System.Collections.ObjectModel;
-using System.Text.Json;
+using BloodDonationApp.Helpers;
 using BloodDonationApp.Models;
 using BloodDonationApp.Services;
-using Microsoft.Maui.Controls;
+
 
 namespace BloodDonationApp
 {
     public partial class UserHomePage : ContentPage
     {
-        private UserResponseDto _userData;
         private readonly IApiService _apiServices;
 
         public UserHomePage(IApiService apiServices)
         {
             InitializeComponent();
             _apiServices = apiServices;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var user = SessionManager.GetUser();
+            if (user != null)
+            {
+                FullNameLabel.Text = $"{user.Name} {user.SurName}";
+                EmailLabel.Text = user.Mail;
+                PhoneLabel.Text = user.PhoneNumber ?? "Belirtilmemiş";
+                BloodTypeLabel.Text = $"Kan Grubu: {user.BloodType}";
+            }
+
             LoadDonationRequests();
-        }
-
-        protected override void OnNavigatedTo(NavigatedToEventArgs args)
-        {
-            base.OnNavigatedTo(args);
-
-            if (Shell.Current.CurrentState.Location.OriginalString.Contains(nameof(UserHomePage)))
-            {
-                if (Shell.Current.CurrentState.Location.OriginalString.Split('?') is string[] routeParts && routeParts.Length > 1)
-                {
-                    var query = System.Web.HttpUtility.ParseQueryString(routeParts[1]);
-                    if (query["UserData"] is string userDataJson)
-                    {
-                        _userData = JsonSerializer.Deserialize<UserResponseDto>(userDataJson);
-                        LoadUserData();
-                    }
-                }
-            }
-        }
-
-        private void LoadUserData()
-        {
-            if (_userData != null)
-            {
-                FullNameLabel.Text = $"{_userData.Name} {_userData.SurName}";
-                EmailLabel.Text = _userData.Mail;
-                PhoneLabel.Text = _userData.PhoneNumber ?? "Belirtilmemiş";
-                BloodTypeLabel.Text = _userData.BloodType.ToString()??"Belirtilmemiş"; 
-            }
         }
 
         private async void LoadDonationRequests()
         {
             try
             {
-                // API'den gerçek bağış isteklerini çekme
-                // Örnek: var requests = await _apiServices.GetDonationRequestsAsync();
-                
-                // Örnek veri (API entegrasyonu yapılınca bu kısım değişecek)
-                var sampleRequests = new ObservableCollection<object>
-                {
-                    new {
-                        Id = 1,
-                        BloodType = "A+",
-                        PatientName = "Mehmet Yılmaz",
-                        HospitalName = "Atatürk Hastanesi",
-                        UrgencyLevel = "Acil",
-                        Description = "Ameliyat için acil kan ihtiyacı vardır.",
-                        CreatedDate = DateTime.Now.AddDays(-1)
-                    },
-                    new {
-                        Id = 2,
-                        BloodType = "O-",
-                        PatientName = "Ayşe Kara",
-                        HospitalName = "Şehir Hastanesi",
-                        UrgencyLevel = "Orta",
-                        Description = "Kanser tedavisi için kan desteği gerekli.",
-                        CreatedDate = DateTime.Now.AddDays(-2)
-                    }
-                };
+                var user = SessionManager.GetUser();
 
-                DonationRequestsCollectionView.ItemsSource = sampleRequests;
+                var response = await _apiServices.GetDonationRequestsAsync(user.Id);
+
+                if (response.Success && response.Data != null)
+                {
+                    var donationRequests = new ObservableCollection<DonationRequest>(response.Data);
+                    DonationRequestsCollectionView.ItemsSource = donationRequests;
+                }
+                else
+                {
+                    DonationRequestsCollectionView.ItemsSource = new ObservableCollection<DonationRequest>();
+
+                    if (!string.IsNullOrEmpty(response.Message))
+                    {
+                        await DisplayAlert("Bilgi", $"Bağış istekleri yüklenemedi: {response.Message}", "Tamam");
+                    }
+                }
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Hata", $"Bağış istekleri yüklenirken hata oluştu: {ex.Message}", "Tamam");
+
+                DonationRequestsCollectionView.ItemsSource = new ObservableCollection<DonationRequest>();
             }
         }
 
         private void OnSearchButtonPressed(object sender, EventArgs e)
         {
             var searchBar = sender as SearchBar;
-            var searchText = searchBar.Text?.ToLower();
-            
-            if (DonationRequestsCollectionView.ItemsSource is ObservableCollection<object> requests)
+            var searchText = searchBar?.Text?.ToLower();
+
+            if (DonationRequestsCollectionView.ItemsSource is ObservableCollection<DonationRequest> requests)
             {
-                var filtered = requests.Where(r => 
-                    (r.GetType().GetProperty("PatientName")?.GetValue(r)?.ToString()?.ToLower()?.Contains(searchText) ?? false) ||
-                    (r.GetType().GetProperty("HospitalName")?.GetValue(r)?.ToString()?.ToLower()?.Contains(searchText) ?? false) ||
-                    (r.GetType().GetProperty("BloodType")?.GetValue(r)?.ToString()?.ToLower()?.Contains(searchText) ?? false)
-                ).ToList();
-                
-                DonationRequestsCollectionView.ItemsSource = new ObservableCollection<object>(filtered);
+                var allRequests = requests.ToList(); 
+                if (string.IsNullOrWhiteSpace(searchText))
+                {
+                    DonationRequestsCollectionView.ItemsSource = new ObservableCollection<DonationRequest>(allRequests);
+                }
+                else
+                {
+                    var filtered = allRequests.Where(r =>
+                        (!string.IsNullOrEmpty(r.PatientName) && r.PatientName.ToLower().Contains(searchText)) ||
+                        (!string.IsNullOrEmpty(r.HospitalName) && r.HospitalName.ToLower().Contains(searchText)) ||
+                        (!string.IsNullOrEmpty(r.BloodType) && r.BloodType.ToLower().Contains(searchText)) ||
+                        (!string.IsNullOrEmpty(r.Description) && r.Description.ToLower().Contains(searchText))
+                    ).ToList();
+
+                    DonationRequestsCollectionView.ItemsSource = new ObservableCollection<DonationRequest>(filtered);
+                }
             }
         }
 
         private async void OnFilterButtonClicked(object sender, EventArgs e)
         {
-            var result = await DisplayActionSheet("Filtrele", "İptal", null, 
+            var result = await DisplayActionSheet("Filtrele", "İptal", null,
                 "Tümü", "Acil", "Normal", "A Rh+", "A Rh-", "B Rh+", "B Rh-", "AB Rh+", "AB Rh-", "0 Rh+", "0 Rh-");
-            
-            // Filtreleme işlemleri burada yapılacak
         }
 
         private async void OnDonateButtonClicked(object sender, EventArgs e)
         {
             if (sender is Button button && button.CommandParameter is int donationId)
             {
-                var confirm = await DisplayAlert("Bağış Onayı", 
-                    "Bu bağış isteği için bağışta bulunmak istediğinize emin misiniz?", 
+                var confirm = await DisplayAlert("Bağış Onayı",
+                    "Bu bağış isteği için bağışta bulunmak istediğinize emin misiniz?",
                     "Evet", "Hayır");
-                
+
                 if (confirm)
                 {
-                    // API'ye bağış isteği gönder
                     try
                     {
-                        // Örnek: await _apiServices.CreateDonationAsync(donationId, _userData.Id);
-                        await DisplayAlert("Başarılı", "Bağış isteğiniz alındı.", "Tamam");
+                        var user = SessionManager.GetUser();
+                        var result = await _apiServices.DoDonation(donationId,user.Id);
+
+                        await DisplayAlert("Başarılı", "Bağış isteğiniz alındı. Sizinle iletişime geçeceğiz.", "Tamam");
+
+                        LoadDonationRequests();
                     }
                     catch (Exception ex)
                     {
@@ -133,16 +121,23 @@ namespace BloodDonationApp
                 }
             }
         }
+        private async void OnCreateRequestClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(RequestPage));
+        }
+        private async void OnDonationClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(UserDonationPage));
+        }
 
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
             bool result = await DisplayAlert("Çıkış", "Çıkış yapmak istediğinizden emin misiniz?", "Evet", "Hayır");
             if (result)
             {
-                
+                SessionManager.ClearSession();
                 SecureStorage.RemoveAll();
-                
-                await Shell.Current.GoToAsync($"//{nameof(UserLoginPage)}");
+                await Shell.Current.GoToAsync("//MainPage");
             }
         }
     }

@@ -18,7 +18,7 @@
 
                      <ScrollView>
                             <StackLayout Padding="20"
-                                          Spacing="15">
+                                         Spacing="15">
                                    <Label Text="Kullanıcı Bilgileri"
                                           FontSize="18"
                                           FontAttributes="Bold"
@@ -71,24 +71,34 @@
                                                  </StackLayout>
                                           </StackLayout>
                                    </Frame>
-
-                                   <Button Text="Çıkış Yap"
-                                           BackgroundColor="Red"
+                                   <Button Text="Bağışlarım"
+                                           BackgroundColor="DarkBlue"
                                            TextColor="White"
                                            CornerRadius="5"
-                                           Clicked="OnLogoutClicked"/>
+                                           Clicked="OnDonationClicked"/>
+                                   <Button Text="Talepte bulun"
+                                          BackgroundColor="Red"
+                                          TextColor="White"
+                                          CornerRadius="5"
+                                          Clicked="OnCreateRequestClicked"/>
+
+                                          <Button Text="Çıkış Yap"
+                                                  BackgroundColor="Red"
+                                                  TextColor="White"
+                                                  CornerRadius="5"
+                                                  Clicked="OnLogoutClicked"/>
                             </StackLayout>
                      </ScrollView>
               </Border>
 
               <!-- Sağ Panel - Ana İçerik -->
               <StackLayout Grid.Column="1"
-                            Padding="20"
-                            Spacing="15">
+                           Padding="20"
+                           Spacing="15">
 
                      <!-- Arama ve Filtreleme -->
                      <StackLayout Orientation="Horizontal"
-                                   Spacing="10">
+                                  Spacing="10">
                             <SearchBar x:Name="DonationSearchBar"
                                        Placeholder="Bağış isteklerinde ara..."
                                        HorizontalOptions="FillAndExpand"

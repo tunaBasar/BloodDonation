@@ -67,7 +67,6 @@ namespace BloodDonationAPI.Controllers
                     SurName = user.SurName,
                     Mail = user.Mail,
                     PhoneNumber = user.PhoneNumber,
-                    StarPoint = user.StarPoint
                 };
                 return Results.Json(new Response<UserResponseDto>
                 {

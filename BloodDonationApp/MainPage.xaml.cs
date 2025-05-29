@@ -14,16 +14,16 @@ public partial class MainPage : ContentPage
 
     private async void OnAdminLoginClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AdminLoginPage());
+        await Shell.Current.GoToAsync(nameof(AdminLoginPage));
     }
 
     private async void OnUserLoginClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new UserLoginPage(_apiService));
+        await Shell.Current.GoToAsync(nameof(UserLoginPage));
     }
 
     private async void OnUserRegister(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new UserRegisterPage());
+        await Shell.Current.GoToAsync(nameof(UserRegisterPage));
     }
 }

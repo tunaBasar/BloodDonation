@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="BloodDonationApp.RequestPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Kan İsteği Oluştur"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Başlık -->
+            <Label Text="Yeni Kan İsteği Oluştur"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#D32F2F"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+
+            <!-- Kan Grubu -->
+            <Frame BackgroundColor="White" 
+                   HasShadow="True" 
+                   CornerRadius="10" 
+                   Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Kan Grubu *" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="#333"/>
+                    <Picker x:Name="BloodTypePicker"
+                            Title="Kan grubu seçiniz"
+                            FontSize="16"
+                            TextColor="#333">
+                        <Picker.Items>
+                            <x:String>A Rh+</x:String>
+                            <x:String>A Rh-</x:String>
+                            <x:String>B Rh+</x:String>
+                            <x:String>B Rh-</x:String>
+                            <x:String>AB Rh+</x:String>
+                            <x:String>AB Rh-</x:String>
+                            <x:String>O Rh+</x:String>
+                            <x:String>O Rh-</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Aciliyet Seviyesi -->
+            <Frame BackgroundColor="White" 
+                   HasShadow="True" 
+                   CornerRadius="10" 
+                   Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Aciliyet Seviyesi *" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="#333"/>
+                    <Picker x:Name="UrgencyLevelPicker"
+                            Title="Aciliyet seviyesi seçiniz"
+                            FontSize="16"
+                            TextColor="#333">
+                        <Picker.Items>
+                            <x:String>Low</x:String>
+                            <x:String>Medium</x:String>
+                            <x:String>High</x:String>
+                            <x:String>Critical</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Açıklama -->
+            <Frame BackgroundColor="White" 
+                   HasShadow="True" 
+                   CornerRadius="10" 
+                   Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Açıklama *" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="#333"/>
+                    <Editor x:Name="DescriptionEditor"
+                            Placeholder="Kan isteği ile ilgili detayları yazın..."
+                            FontSize="16"
+                            HeightRequest="120"
+                            TextColor="#333"
+                            PlaceholderColor="#999"
+                            BackgroundColor="Transparent"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Kullanıcı Bilgisi (Sadece gösterim için) -->
+            <Frame BackgroundColor="#E3F2FD" 
+                   HasShadow="True" 
+                   CornerRadius="10" 
+                   Padding="15">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="İstek Sahibi" 
+                           FontSize="14" 
+                           FontAttributes="Bold"
+                           TextColor="#1976D2"/>
+                    <Label x:Name="UserInfoLabel"
+                           Text="Yükleniyor..."
+                           FontSize="14"
+                           TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               IsVisible="False"
+                               IsRunning="False"
+                               Color="#D32F2F"
+                               HeightRequest="40"/>
+
+            <!-- Butonlar -->
+            <VerticalStackLayout Spacing="15" Margin="0,20,0,0">
+                <Button x:Name="CreateRequestButton"
+                        Text="İsteği Oluştur"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        CornerRadius="25"
+                        Clicked="OnCreateRequestClicked"/>
+
+                <Button Text="İptal"
+                        BackgroundColor="Transparent"
+                        TextColor="#D32F2F"
+                        FontSize="16"
+                        BorderColor="#D32F2F"
+                        BorderWidth="2"
+                        HeightRequest="45"
+                        CornerRadius="22"
+                        Clicked="OnCancelClicked"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

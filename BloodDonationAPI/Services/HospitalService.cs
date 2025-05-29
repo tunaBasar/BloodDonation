@@ -9,20 +9,20 @@ namespace BloodDonationAPI.Services
 {
     
 
-    public class PlacesService:IPlacesService
+    public class HospitalService:IHospitalService
     {
         private readonly ApplicationDbContext context;
         
         
-        public PlacesService(ApplicationDbContext context)
+        public HospitalService(ApplicationDbContext context)
         {
             this.context=context;
         }
 
-        public async Task<PlacesDto> CreatePlacesAsync(PlacesDto dto)
+        public async Task<HospitalsDto> CreatePlacesAsync(HospitalsDto dto)
         {
             var places= dto.ToEntity();
-            await context.Places.AddAsync(places);
+            await context.Hospitals.AddAsync(places);
             await context.SaveChangesAsync();
             return places.ToDto();
         }
@@ -34,25 +34,25 @@ namespace BloodDonationAPI.Services
             {
                 throw new ArgumentNullException(nameof(id)," cant find");
             }
-            context.Places.Remove(place);
+            context.Hospitals.Remove(place);
             await context.SaveChangesAsync();
             return true;
         }
 
-        public async Task<IEnumerable<PlacesDto>> GetAllPlacesAsync()
+        public async Task<IEnumerable<HospitalsDto>> GetAllPlacesAsync()
         {
-            var place = await context.Places.ToListAsync();
+            var place = await context.Hospitals.ToListAsync();
             var placesDtos = place.Select(p => p.ToDto());
             return placesDtos;
         }
 
-        public async Task<PlacesDto?> GetPlacesByIdAsync(int id)
+        public async Task<HospitalsDto?> GetPlacesByIdAsync(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentException(nameof(id), " does not contain");
             }
-            var place = await context.Places.FindAsync(id);
+            var place = await context.Hospitals.FindAsync(id);
             if (place == null)
             {
                 throw new ArgumentNullException(nameof(id), " does not match any place!!");
@@ -61,7 +61,7 @@ namespace BloodDonationAPI.Services
             return placesDtos;
         }
 
-        public async Task<bool> UpdatePlacesAsync(int id, PlacesDto dto)
+        public async Task<bool> UpdatePlacesAsync(int id, HospitalsDto dto)
         {
             if (dto == null)
             {
@@ -73,9 +73,9 @@ namespace BloodDonationAPI.Services
             return true;
         }
 
-        public Places FindById(int id)
+        public Hospitals FindById(int id)
         {
-            var place = context.Places.Find(id);
+            var place = context.Hospitals.Find(id);
             if (place == null)
             {
                 throw new ArgumentNullException(nameof(id), " this id is not avaible");

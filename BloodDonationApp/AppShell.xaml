@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
+    x:Class="BloodDonationApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:BloodDonationApp"
-    x:Class="BloodDonationApp.AppShell">
+    xmlns:local="clr-namespace:BloodDonationApp"
+    Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent Route="MainPage" ContentTemplate="{DataTemplate pages:MainPage}" />
-    <ShellContent Route="AdminLoginPage" ContentTemplate="{DataTemplate pages:AdminLoginPage}" />
-    <ShellContent Route="UserLoginPage" ContentTemplate="{DataTemplate pages:UserLoginPage}" />
-    <ShellContent Route="UserHomePage" ContentTemplate="{DataTemplate pages:UserHomePage}" />
-    <ShellContent Route="UserRegisterPage" ContentTemplate="{DataTemplate pages:UserRegisterPage}"/>
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
 </Shell>

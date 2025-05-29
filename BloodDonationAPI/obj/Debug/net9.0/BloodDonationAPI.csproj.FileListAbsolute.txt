@@ -148,6 +148,7 @@ C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\Blood
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\BloodDonationAPI.csproj.CoreCompileInputs.cache
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\BloodDonationAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\BloodDonationAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\BloodDonationAPI.sourcelink.json
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\scopedcss\bundle\BloodDonationAPI.styles.css
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\staticwebassets.development.json
@@ -164,4 +165,3 @@ C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\refin
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\BloodDonationAPI.pdb
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\BloodDonationAPI.genruntimeconfig.cache
 C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\ref\BloodDonationAPI.dll
-C:\Users\ymanb\OneDrive\Desktop\Projeler\BloodDonationAPI\obj\Debug\net9.0\BloodDonationAPI.sourcelink.json

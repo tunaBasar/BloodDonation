@@ -4,5 +4,7 @@ namespace BloodDonationAPI.DTOs.DonationDto
     {
         public int UserId { get; set; }
         public int RequestId { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

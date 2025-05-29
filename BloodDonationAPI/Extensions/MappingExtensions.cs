@@ -20,7 +20,6 @@ namespace BloodDonationAPI.Extensions
                 Mail = user.Mail,
                 PhoneNumber = user.PhoneNumber,
                 BloodType = user.BloodType,
-                StarPoint = user.StarPoint
             };
         }
 
@@ -46,13 +45,22 @@ namespace BloodDonationAPI.Extensions
                 RequestId = donation.RequestId,
             };
         }
-        public static PlacesDto ToDto(this Places places)
+        public static HospitalsDto ToDto(this Hospitals hospitals)
         {
-            return new PlacesDto
+            return new HospitalsDto
             {
-                Address = places.Address,
-                IsMobile = places.IsMobile,
-                Plate = places.Plate
+                Address = hospitals.Address,
+                IsMobile = hospitals.IsMobile,
+                Plate = hospitals.Plate
+            };
+        }
+        public static DonationCreateDto ToDonationCreateDto(this DeactiveRequestDto dto)
+        {
+            return new DonationCreateDto
+            {
+                RequestId = dto.requestId,
+                UserId = dto.userId,
+                IsActive = dto.IsActive
             };
         }
 
@@ -68,8 +76,7 @@ namespace BloodDonationAPI.Extensions
                 Password = dto.Password,
                 PhoneNumber = dto.PhoneNumber,
                 Tc = dto.Tc,
-                BloodType=dto.BloodType,
-                StarPoint = 0
+                BloodType = dto.BloodType
             };
         }
 
@@ -94,9 +101,9 @@ namespace BloodDonationAPI.Extensions
             };
         }
 
-        public static Places ToEntity(this PlacesDto dto)
+        public static Hospitals ToEntity(this HospitalsDto dto)
         {
-            return new Places
+            return new Hospitals
             {
                 Address = dto.Address,
                 IsMobile = dto.IsMobile,

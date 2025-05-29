@@ -11,13 +11,10 @@ namespace BloodDonationAPI.Services
     public class DonationService : IDonationService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IRequestService _request;
-
         private readonly IUserService _user;
-        public DonationService(ApplicationDbContext context, IRequestService request,IUserService user)
+        public DonationService(ApplicationDbContext context,IUserService user)
         {
-            this._context=context;
-            this._request=request;
+            this._context = context;
             this._user=user;
         }
         public async Task<DonationResponseDto> CreateDonationAsync(DonationCreateDto dto)
@@ -26,9 +23,8 @@ namespace BloodDonationAPI.Services
             {
                 throw new ("For adding donation you must give me donation!!!");
             }
-            var request = _request.GetRequestByIdAsync(dto.RequestId);
             var user = _user.GetUserByIdAsync(dto.UserId);
-            if (request==null || user == null)
+            if (user == null)
             {
                 throw new ArgumentNullException("user or request cant be null!!!");
             }
@@ -84,14 +80,14 @@ namespace BloodDonationAPI.Services
         
         public Donation FindDontaionById(int id)
         {
-            if(id<=0)
+            if (id <= 0)
             {
-                throw new ArgumentException(nameof(id)," does not avaible");
+                throw new ArgumentException(nameof(id), " does not avaible");
             }
-            var donation=_context.Donations.Find(id);
-            if(donation==null)
+            var donation = _context.Donations.Find(id);
+            if (donation == null)
             {
-                throw new ArgumentNullException(nameof(id)," does not match any donation");
+                throw new ArgumentNullException(nameof(id), " does not match any donation");
             }
             return donation;
         }

@@ -46,6 +46,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = BloodDonationApp.MainPage.
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 
+[C:/Users/ymanb/OneDrive/Desktop/Projeler/BloodDonationApp/RequestPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = BloodDonationApp.RequestPage.xaml
+build_metadata.AdditionalFiles.TargetPath = RequestPage.xaml
+build_metadata.AdditionalFiles.RelativePath = RequestPage.xaml
+
 [C:/Users/ymanb/OneDrive/Desktop/Projeler/BloodDonationApp/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = BloodDonationApp.Resources.Styles.Colors.xaml
@@ -57,6 +63,12 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = BloodDonationApp.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/ymanb/OneDrive/Desktop/Projeler/BloodDonationApp/UserDonationPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = BloodDonationApp.UserDonationPage.xaml
+build_metadata.AdditionalFiles.TargetPath = UserDonationPage.xaml
+build_metadata.AdditionalFiles.RelativePath = UserDonationPage.xaml
 
 [C:/Users/ymanb/OneDrive/Desktop/Projeler/BloodDonationApp/UserHomePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
