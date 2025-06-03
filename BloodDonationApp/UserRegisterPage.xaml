@@ -74,6 +74,7 @@
                                                  TextColor="{StaticResource Gray600}"/>
                                           <Entry x:Name="TcEntry"
                                                  Placeholder="xxxxxxxxxxx"
+                                                 MaxLength="11"
                                                  Keyboard="Numeric"
                                                  BackgroundColor="Transparent"/>
                                    </StackLayout>
@@ -85,6 +86,7 @@
                                                  TextColor="{StaticResource Gray600}"/>
                                           <Entry x:Name="PhoneEntry"
                                                  Placeholder="05XX XXX XX XX"
+                                                 MaxLength="11"
                                                  Keyboard="Telephone"
                                                  BackgroundColor="Transparent"/>
                                    </StackLayout>

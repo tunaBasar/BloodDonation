@@ -15,4 +15,12 @@ public class HospitalController : ControllerBase
         this.hospitalService = hospitalService;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<HospitalsDto>>> GetAllHospitals()
+    {
+        var hospitals = await hospitalService.GetAllPlacesAsync();
+        return Ok(hospitals);
+    }
+
+
 }

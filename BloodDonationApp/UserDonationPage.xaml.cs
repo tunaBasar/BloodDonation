@@ -55,7 +55,6 @@ namespace BloodDonationApp
         }
     }
 
-    // DTO modelin burada yer alabilir
     public class DonationDto
     {
         public string BloodType { get; set; }

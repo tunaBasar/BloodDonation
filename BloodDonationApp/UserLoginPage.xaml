@@ -57,6 +57,7 @@
                                TextColor="{StaticResource Gray600}"/>
                         <Entry x:Name="TcEntry"
                                Placeholder="55555555555"
+                               MaxLength="11"
                                Keyboard="Numeric"
                                BackgroundColor="Transparent"/>
                     </StackLayout>

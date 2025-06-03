@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="BloodDontaionAppV2.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Kan Bağış Sistemi">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
+            
+            <Image Source="blood_drop.png" 
+                   HeightRequest="120" 
+                   HorizontalOptions="Center" />
+            
+            <Label x:Name="WelcomeLabel"
+                   Text="Kan Bağış Sistemi"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource Primary}" />
+
+            <Label Text="Hayat kurtarmak için doğru yerdesiniz"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   TextColor="{StaticResource Gray600}" />
+
+            <VerticalStackLayout Spacing="15" Margin="0,30,0,0">
+                
+                <Button x:Name="UserLoginBtn"
+                        Text="Kullanıcı Girişi"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="{StaticResource Secondary}"
+                        Clicked="OnUserLoginClicked" />
+
+                <Button x:Name="UserRegisterBtn"
+                        Text="Kayıt Ol"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        BackgroundColor="{StaticResource PrimaryLight}"
+                        TextColor="{StaticResource Secondary}"
+                        Clicked="OnUserRegisterClicked" />
+
+                <Button x:Name="AdminLoginBtn"
+                        Text="Admin Girişi"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        BackgroundColor="{StaticResource PrimaryDark}"
+                        TextColor="{StaticResource Secondary}"
+                        Clicked="OnAdminLoginClicked" />
+
+            </VerticalStackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,30,0,0">
+                <Label Text="❤️" FontSize="20" />
+                <Label Text="Her damla kan bir hayat kurtarır" 
+                       FontSize="14" 
+                       TextColor="{StaticResource Gray600}"
+                       VerticalOptions="Center" />
+                <Label Text="❤️" FontSize="20" />
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

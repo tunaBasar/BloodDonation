@@ -11,47 +11,11 @@ namespace BloodDonationAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IAdminService _adminService;
 
-        public AuthController(IUserService userService, IAdminService adminService)
+        public AuthController(IUserService userService)
         {
             this._userService = userService;
-            this._adminService = adminService;
         }
-
-        [HttpPost("adminlogin")]
-        public async Task<IActionResult> AdminLogin([FromBody] AdminLoginDto dto)
-        {
-            try
-            {
-                var result = await _adminService.AdminLoginAsync(dto);
-                if (result)
-                {
-                    return Ok("Admin girisi basarili");
-                }
-                else
-                {
-                    return BadRequest("Admin girisi basarisiz");
-                }
-            }
-            catch (ArgumentNullException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Sunucu hatası oluştu.");
-            }
-        }
-
 
         [HttpPost("userlogin")]
         public async Task<IResult> UserLogin([FromBody] UserLoginDto dto)

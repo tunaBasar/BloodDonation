@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers()
                 .AddJsonOptions(opt=>{
                     opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());});
@@ -24,8 +23,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRequestService,RequestService>();
 builder.Services.AddScoped<IDonationService,DonationService>();
-builder.Services.AddScoped<IAdminService,AdminService>();
-builder.Services.AddScoped<IPlacesService,PlacesService>();
+builder.Services.AddScoped<IHospitalService,HospitalService>();
 
 
 var app = builder.Build();
